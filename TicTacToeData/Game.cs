@@ -6,9 +6,22 @@ namespace TicTacToeData
 {
     public class Game
     {
-        private const int Size = 3;
+        public const int Size = 3;
         private FieldTypeEnum[,] _board = new FieldTypeEnum[Size, Size];
         private bool _isXPlaying;
+
+        public Game()
+        {
+            Start();
+        }
+
+        public string ActivePlayer
+        {
+            get
+            {
+                return _isXPlaying ? "X" : "O";
+            }
+        }
 
         public void Start()
         {
@@ -22,28 +35,40 @@ namespace TicTacToeData
             }
         }
 
-        public void PlaceCheckMark(int row, int col)
+        public GameResultEnum PlaceCheckMark(int row, int col)
         {
-            if(row < 0 || row > Size - 1 || col < 0 || col > Size - 1)
-            {
-                throw new ArgumentException("No such row or colum");
-            }
+            CheckIfFieldIsValid(row, col);
 
             if(_board[row, col] != FieldTypeEnum.Empty)
             {
-                return;
+                return GameResultEnum.Continue;
             }
 
             _board[row, col] = _isXPlaying ? FieldTypeEnum.X : FieldTypeEnum.O;
 
             _isXPlaying = !_isXPlaying;
 
-            CheckWinner();
+            return CheckWinner();
         }
 
-        private void CheckWinner()
+        public FieldTypeEnum GetFieldValue(int row, int col)
         {
-            throw new NotImplementedException();
+            CheckIfFieldIsValid(row, col);
+
+            return _board[row, col];
+        }
+
+        private static void CheckIfFieldIsValid(int row, int col)
+        {
+            if (row < 0 || row > Size - 1 || col < 0 || col > Size - 1)
+            {
+                throw new ArgumentException("No such row or colum");
+            }
+        }
+
+        private GameResultEnum CheckWinner()
+        {
+            return GameResultEnum.Continue;
         }
     }
 }
