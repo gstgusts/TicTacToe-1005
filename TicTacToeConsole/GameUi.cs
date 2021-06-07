@@ -13,6 +13,47 @@ namespace TicTacToeConsole
         {
             _game = game;
         }
+        
+        public void Show()
+        {
+            while(true)
+            {
+                PrintBoard();
+
+                var userInput = Console.ReadLine().ToUpper();
+
+                switch(userInput)
+                {
+                    case "N":
+                        _game.Start();
+                        break;
+                    case "E":
+                        return;
+                    case "P":
+                        var result = PlaceCheckMark();
+
+                        switch (result)
+                        {
+                            case GameResultEnum.Continue:
+                                break;
+                            case GameResultEnum.Duece:
+                                Console.WriteLine("Duece");
+                                break;
+                            case GameResultEnum.XWon:
+                                Console.WriteLine("X Won!!!");
+                                break;
+                            case GameResultEnum.OWon:
+                                Console.WriteLine("O Won!!!");
+                                break;
+                        }
+
+                        break;
+                    default:
+                        Console.WriteLine("No such option");
+                        break;
+                }
+            }
+        }
 
         public void PrintBoard()
         {
@@ -54,6 +95,35 @@ namespace TicTacToeConsole
             }
 
             return $" {value} ";
+        }
+
+        private GameResultEnum PlaceCheckMark()
+        {
+            int row = GetNumber("Please enter row: ");
+            int col = GetNumber("Please enter column: ");
+            return _game.PlaceCheckMark(row - 1, col - 1);
+        }
+
+        private int GetNumber(string prompt)
+        {
+            while(true)
+            {
+                Console.Write(prompt);
+                var userInput = Console.ReadLine();
+
+                int val;
+
+                var result = int.TryParse(userInput, out val);
+
+                Console.WriteLine();
+
+                if(result)
+                {
+                    return val;
+                }
+
+                Console.WriteLine("Input is not a valid number");
+            }
         }
     }
 }

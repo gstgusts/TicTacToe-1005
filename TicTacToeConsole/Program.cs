@@ -10,7 +10,7 @@ namespace TicTacToeConsole
             var game = new Game();
             var gameUi = new GameUi(game);
 
-            gameUi.PrintBoard();
+            gameUi.Show();
         }
     }
 }

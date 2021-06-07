@@ -68,6 +68,7 @@ namespace TicTacToeData
 
         private GameResultEnum CheckWinner()
         {
+            // this method should check for winner or for the end of the game
             return GameResultEnum.Continue;
         }
     }
