@@ -11,12 +11,14 @@
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
+        <Button Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Click="btn_Restart_Click">Restart</Button>
         <Button x:Name="btn_0_0" Grid.Row="0" Grid.Column="0" Click="btn_0_0_Click" FontFamily="Arial Black" FontSize="72"></Button>
         <Button x:Name="btn_0_1" Grid.Row="0" Grid.Column="1" Click="btn_0_0_Click" FontFamily="Arial Black" FontSize="72"></Button>
         <Button x:Name="btn_0_2" Grid.Row="0" Grid.Column="2" Click="btn_0_0_Click" FontFamily="Arial Black" FontSize="72"></Button>

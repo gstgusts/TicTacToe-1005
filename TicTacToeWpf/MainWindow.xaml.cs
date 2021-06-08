@@ -29,6 +29,13 @@ namespace TicTacToeWpf
             RefreshUi();
         }
 
+        private void btn_Restart_Click(object sender, RoutedEventArgs e)
+        {
+            _game.Start();
+            RefreshUi();
+            EnableDisableButtons(true);
+        }
+
         private void btn_0_0_Click(object sender, RoutedEventArgs e)
         {
             var button = (Button)sender;
@@ -41,6 +48,24 @@ namespace TicTacToeWpf
             var result = _game.PlaceCheckMark(row, col);
 
             RefreshUi();
+
+            switch (result)
+            {
+                case GameResultEnum.Continue:
+                    break;
+                case GameResultEnum.Duece:
+                    EnableDisableButtons(false);
+                    MessageBox.Show("Duece");
+                    break;
+                case GameResultEnum.XWon:
+                    EnableDisableButtons(false);
+                    MessageBox.Show("X won");
+                    break;
+                case GameResultEnum.OWon:
+                    EnableDisableButtons(false);
+                    MessageBox.Show("O won");
+                    break;
+            }
         }
 
         private void RefreshUi()
@@ -54,6 +79,19 @@ namespace TicTacToeWpf
             btn_2_0.Content = GetFieldValue(2, 0);
             btn_2_1.Content = GetFieldValue(2, 1);
             btn_2_2.Content = GetFieldValue(2, 2);
+        }
+
+        private void EnableDisableButtons(bool enable)
+        {
+            btn_0_0.IsEnabled = enable;
+            btn_0_1.IsEnabled = enable;
+            btn_0_2.IsEnabled = enable;
+            btn_1_0.IsEnabled = enable;
+            btn_1_1.IsEnabled = enable;
+            btn_1_2.IsEnabled = enable;
+            btn_2_0.IsEnabled = enable;
+            btn_2_1.IsEnabled = enable;
+            btn_2_2.IsEnabled = enable;
         }
 
         private string GetFieldValue(int row, int col)
