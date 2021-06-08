@@ -66,10 +66,73 @@ namespace TicTacToeData
             }
         }
 
-        private GameResultEnum CheckWinner()
+        public GameResultEnum CheckWinner()
         {
-            // this method should check for winner or for the end of the game
-            return GameResultEnum.Continue;
+            // this method should check for winner or for the end of the game;
+            bool isWinner = false;
+
+            // checking horizontal lines
+            if (_board[0, 0] == _board[0, 1] && _board[0, 1] == _board[0, 2] && _board[0, 0] != FieldTypeEnum.Empty)
+            {
+                isWinner = true;
+            }
+            else if (_board[1, 0] == _board[1, 1] && _board[1, 1] == _board[1, 2] && _board[1, 0] != FieldTypeEnum.Empty)
+            {
+                isWinner = true;
+            }
+            else if (_board[2, 0] == _board[2, 1] && _board[2, 1] == _board[2, 2] && _board[2, 0] != FieldTypeEnum.Empty)
+            {
+                isWinner = true;
+            }
+
+            // checking vertical lines
+            else if (_board[0, 0] == _board[1, 0] && _board[1, 0] == _board[2, 0] && _board[0, 0] != FieldTypeEnum.Empty)
+            {
+                isWinner = true;
+            }
+            else if (_board[0, 1] == _board[1, 1] && _board[1, 1] == _board[2, 1] && _board[0, 1] != FieldTypeEnum.Empty)
+            {
+                isWinner = true;
+            }
+            else if (_board[0, 2] == _board[1, 2] && _board[1, 2] == _board[2, 2] && _board[0, 2] != FieldTypeEnum.Empty)
+            {
+                isWinner = true;
+            }
+
+            // checking diagonals
+            else if (_board[0, 0] == _board[1, 1] && _board[1, 1] == _board[2, 2] && _board[0, 0] != FieldTypeEnum.Empty)
+            {
+                isWinner = true;
+            }
+            else if (_board[0, 2] == _board[1, 1] && _board[1, 1] == _board[2, 0] && _board[0, 2] != FieldTypeEnum.Empty)
+            {
+                isWinner = true;
+            }
+
+            if (isWinner)
+            {
+                // buttons have to be disabled -
+                if (_isXPlaying)
+                {
+                    return GameResultEnum.OWon;
+                }
+                else
+                {
+                    return GameResultEnum.XWon;
+                }
+            }
+            else
+            {
+                foreach (var item in _board)
+                {
+                    if(item == FieldTypeEnum.Empty)
+                    {
+                        return GameResultEnum.Continue;
+                    }
+                }
+
+                return GameResultEnum.Duece;
+            }
         }
     }
 }
