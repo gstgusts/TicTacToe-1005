@@ -6,12 +6,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TicTacToeData;
+using TicTacToeWeb.Utils;
 
 namespace TicTacToeWeb.Pages
 {
     public class IndexModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
+
+        private const string _gameKey = "game";
 
         [BindProperty]
         public Game TicTacToeGame { get; set; }
@@ -23,12 +26,27 @@ namespace TicTacToeWeb.Pages
 
         public void OnGet()
         {
-            TicTacToeGame = new Game();
+            TicTacToeGame = HttpContext.Session.Get<Game>(_gameKey);
+
+            if(TicTacToeGame == null)
+            {
+                TicTacToeGame = new Game();
+            }
+
+            if(Request.QueryString.HasValue)
+            {
+                var row = int.Parse(Request.Query["row"]);
+                var col = int.Parse(Request.Query["col"]);
+
+                var gameResult = TicTacToeGame.PlaceCheckMark(row, col);
+            }
+
+            HttpContext.Session.Set<Game>(_gameKey, TicTacToeGame);
         }
 
         public string GetFieldImage(int row, int col)
         {
-            if(TicTacToeGame != null)
+            if(TicTacToeGame == null)
             {
                 return string.Empty;
             }

@@ -4,6 +4,7 @@ using System.Text;
 
 namespace TicTacToeData
 {
+    [Serializable]
     public class Game
     {
         public const int Size = 3;
@@ -20,6 +21,31 @@ namespace TicTacToeData
             get
             {
                 return _isXPlaying ? "X" : "O";
+            }
+        }
+
+        public bool IsXPlaying
+        {
+            get
+            {
+                return _isXPlaying;
+            }
+
+            set
+            {
+                _isXPlaying = value;
+            }
+        }
+
+        public FieldTypeEnum[,] Board
+        {
+            get
+            {
+                return _board;
+            }
+            set
+            {
+                _board = value;
             }
         }
 
