@@ -23,10 +23,7 @@ namespace TicTacToeWeb.Pages
         public string Message { get; set; }
 
         [BindProperty]
-        public bool IsGameFinished { get {
-                return !string.IsNullOrEmpty(Message);
-            } 
-        }
+        public bool IsGameFinished => !string.IsNullOrEmpty(Message);
 
         public IndexModel(ILogger<IndexModel> logger)
         {
