@@ -19,6 +19,15 @@ namespace TicTacToeWeb.Pages
         [BindProperty]
         public Game TicTacToeGame { get; set; }
 
+        [BindProperty]
+        public string Message { get; set; }
+
+        [BindProperty]
+        public bool IsGameFinished { get {
+                return !string.IsNullOrEmpty(Message);
+            } 
+        }
+
         public IndexModel(ILogger<IndexModel> logger)
         {
             _logger = logger;
@@ -35,10 +44,30 @@ namespace TicTacToeWeb.Pages
 
             if(Request.QueryString.HasValue)
             {
-                var row = int.Parse(Request.Query["row"]);
-                var col = int.Parse(Request.Query["col"]);
+                if(!string.IsNullOrEmpty(Request.Query["restart"]))
+                {
+                    TicTacToeGame = new Game();
+                } else {
+                    var row = int.Parse(Request.Query["row"]);
+                    var col = int.Parse(Request.Query["col"]);
 
-                var gameResult = TicTacToeGame.PlaceCheckMark(row, col);
+                    var gameResult = TicTacToeGame.PlaceCheckMark(row, col);
+
+                    switch (gameResult)
+                    {
+                        case GameResultEnum.Continue:
+                            break;
+                        case GameResultEnum.Duece:
+                            Message = "Duece";
+                            break;
+                        case GameResultEnum.XWon:
+                            Message = "X won";
+                            break;
+                        case GameResultEnum.OWon:
+                            Message = "O won";
+                            break;
+                    }
+                }
             }
 
             HttpContext.Session.Set<Game>(_gameKey, TicTacToeGame);

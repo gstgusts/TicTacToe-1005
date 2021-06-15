@@ -18,41 +18,115 @@
         border-radius: 0px;
         background-color: #ffffff;
     }
+
+    .tic-tac-toe-message {
+        margin: 30px;
+    }
 </style>
 
 <div class="container" style="width:450px; height:450px; border:solid 1px #000000">
     <div class="row">
         <div class="col tic-tac-toe-cell">
-            <a href="/?row=0&col=0" class="btn btn-secondary tic-tac-toe-button" role="button">@Html.Raw(Model.GetFieldImage(0, 0))</a>
+            @if (Model.IsGameFinished)
+            {
+                @Html.Raw(Model.GetFieldImage(0, 0))
+            } else
+            {
+                <a href="/?row=0&col=0" class="btn btn-secondary tic-tac-toe-button" role="button">@Html.Raw(Model.GetFieldImage(0, 0))</a>
+            }
         </div>
         <div class="col tic-tac-toe-cell">
-            <a href="/?row=0&col=1" class="btn btn-secondary tic-tac-toe-button" role="button">@Html.Raw(Model.GetFieldImage(0, 1))</a>
+            @if (Model.IsGameFinished)
+            {
+                @Html.Raw(Model.GetFieldImage(0, 1))
+            }
+            else
+            {
+                <a href="/?row=0&col=1" class="btn btn-secondary tic-tac-toe-button" role="button">@Html.Raw(Model.GetFieldImage(0, 1))</a>
+            }
+        </div>
+        <div class="col tic-tac-toe-cell">
+            @if (Model.IsGameFinished)
+            {
+                @Html.Raw(Model.GetFieldImage(0, 2))
+            }
+            else
+            {
+                <a href="/?row=0&col=2" class="btn btn-secondary tic-tac-toe-button" role="button">@Html.Raw(Model.GetFieldImage(0, 2))</a>
+            }
+        </div>
+    </div>
+    <div class="row">
+        <div class="col tic-tac-toe-cell">
+            @if (Model.IsGameFinished)
+            {
+                @Html.Raw(Model.GetFieldImage(1, 0))
+            }
+            else
+            {
+                <a href="/?row=1&col=0" class="btn btn-secondary tic-tac-toe-button" role="button">@Html.Raw(Model.GetFieldImage(1, 0))</a>
+            }
+        </div>
+        <div class="col tic-tac-toe-cell">
+            @if (Model.IsGameFinished)
+            {
+                @Html.Raw(Model.GetFieldImage(1, 1))
+            }
+            else
+            {
+                <a href="/?row=1&col=1" class="btn btn-secondary tic-tac-toe-button" role="button">@Html.Raw(Model.GetFieldImage(1, 1))</a>
+            }
+        </div>
+        <div class="col tic-tac-toe-cell">
+            @if (Model.IsGameFinished)
+            {
+                @Html.Raw(Model.GetFieldImage(1, 2))
+            }
+            else
+            {
+                <a href="/?row=1&col=2" class="btn btn-secondary tic-tac-toe-button" role="button">@Html.Raw(Model.GetFieldImage(1, 2))</a>
+            }
+        </div>
+    </div>
+    <div class="row">
+        <div class="col tic-tac-toe-cell">
+            @if (Model.IsGameFinished)
+            {
+                @Html.Raw(Model.GetFieldImage(2, 0))
+            }
+            else
+            {
+                <a href="/?row=2&col=0" class="btn btn-secondary tic-tac-toe-button" role="button">@Html.Raw(Model.GetFieldImage(2, 0))</a>
+            }
+        </div>
+        <div class="col tic-tac-toe-cell">
+            @if (Model.IsGameFinished)
+            {
+                @Html.Raw(Model.GetFieldImage(2, 1))
+            }
+            else
+            {
+                <a href="/?row=2&col=1" class="btn btn-secondary tic-tac-toe-button" role="button">@Html.Raw(Model.GetFieldImage(2, 1))</a>
+            }
+        </div>
+        <div class="col tic-tac-toe-cell">
+            @if (Model.IsGameFinished)
+            {
+                @Html.Raw(Model.GetFieldImage(2, 2))
+            }
+            else
+            {
+                <a href="/?row=2&col=2" class="btn btn-secondary tic-tac-toe-button" role="button">@Html.Raw(Model.GetFieldImage(2, 2))</a>
+            }
+        </div>
+    </div>
 
+    @if (!string.IsNullOrEmpty(Model.Message))
+    {
+        <div class="alert alert-primary tic-tac-toe-message" role="alert">
+            @Model.Message
+            <a href="/?restart=true" class="btn btn-secondary" role="button">Restart</a>
         </div>
-        <div class="col tic-tac-toe-cell">
-            <a href="/?row=0&col=2" class="btn btn-secondary tic-tac-toe-button" role="button">@Html.Raw(Model.GetFieldImage(0, 2))</a>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col tic-tac-toe-cell">
-            <a href="/?row=1&col=0" class="btn btn-secondary tic-tac-toe-button" role="button">@Html.Raw(Model.GetFieldImage(1, 0))</a>
-        </div>
-        <div class="col tic-tac-toe-cell">
-            <a href="/?row=1&col=1" class="btn btn-secondary tic-tac-toe-button" role="button">@Html.Raw(Model.GetFieldImage(1, 1))</a>
-        </div>
-        <div class="col tic-tac-toe-cell">
-            <a href="/?row=1&col=2" class="btn btn-secondary tic-tac-toe-button" role="button">@Html.Raw(Model.GetFieldImage(1, 2))</a>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col tic-tac-toe-cell">
-            <a href="/?row=2&col=0" class="btn btn-secondary tic-tac-toe-button" role="button">@Html.Raw(Model.GetFieldImage(2, 0))</a>
-        </div>
-        <div class="col tic-tac-toe-cell">
-            <a href="/?row=2&col=1" class="btn btn-secondary tic-tac-toe-button" role="button">@Html.Raw(Model.GetFieldImage(2, 1))</a>
-        </div>
-        <div class="col tic-tac-toe-cell">
-            <a href="/?row=2&col=2" class="btn btn-secondary tic-tac-toe-button" role="button">@Html.Raw(Model.GetFieldImage(2, 2))</a>
-        </div>
-    </div>
+    }
+
 </div>
